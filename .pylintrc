@@ -648,4 +648,4 @@ redefining-builtins-modules=six.moves,past.builtins,future.builtins,builtins,io
 
 [MASTER]
 
-disable=C0116,C0115,W0707,E0402,W0718,R0903,E0015,C0114,W0246,E0001
+disable=C0116,C0115,W0707,E0402,W0718,R0903,E0015,C0114,W0246,E0001,C0103,C0411

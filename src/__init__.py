@@ -1,7 +1,12 @@
-from typing import Type
 import bpy
-from bpy.types import PropertyGroup, PointerProperty
+from typing import Type
+from bpy.types import PropertyGroup
+from bpy.props import PointerProperty
 from bpy.utils import register_class, unregister_class
+
+from .google_earth.operator import MAPBRIDGE_OT_OpenEarthWebsite, MAPBRIDGE_OT_RunGoogleEarthImport
+from .google_earth.properties import GoogleImportProperties
+from .panel import MAPBRIDGE_PT_MainPanel
 
 from .google_earth.register_binaries import register_binaries
 
@@ -10,11 +15,16 @@ bl_info = {
     "blender": (4, 0, 0),
     "category": "Import-Export",
     "author": "KIWIbird717",
-    "support": "TESTING"
 }
 
-classes = []
-properties: list[Type[PropertyGroup]] = []
+classes = [
+    MAPBRIDGE_PT_MainPanel,
+    MAPBRIDGE_OT_RunGoogleEarthImport,
+    MAPBRIDGE_OT_OpenEarthWebsite
+]
+properties: list[Type[PropertyGroup]] = [GoogleImportProperties]
+
+classes.extend(properties)
 
 
 def register():
@@ -26,8 +36,7 @@ def register():
 
     # set used properties
     for prop in properties:
-        scene = bpy.types.Scene
-        setattr(scene, prop.name, PointerProperty(type=prop))
+        setattr(bpy.types.Scene, prop.name, PointerProperty(type=prop))
 
 
 def unregister():
@@ -37,5 +46,4 @@ def unregister():
 
     # delete used properties
     for prop in properties:
-        scene = bpy.types.Scene
-        delattr(scene, prop.name)
+        delattr(bpy.types.Scene, prop.name)
