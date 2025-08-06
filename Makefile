@@ -18,6 +18,16 @@ build: ## Build project in zip archive
 	@echo "$(GREEN)Run build scrip$(NC)"
 	$(PYTHON) $(BUILD_SCRIPT_PATH)
 
+init-submodule: ## Initialize and update google-earth-importer submodule if not present
+	@echo "$(YELLOW)Checking and initializing submodules...$(NC)"
+	@if [ ! -d "./google-earth-exporter/.git" ]; then \
+		echo "No submodules found, adding submodules..."; \
+		git submodule add git@github.com:KIWIbird717/Google-Earth-CLI-Exporter.git google-earth-exporter; \
+	fi
+	git submodule init
+	git submodule update --remote
+	@echo "$(GREEN)Submodule initialized$(NC)"
+
 run: ## Install addon to blender and launch blender with installed addon
 	@echo "$(YELLOW)Installing addon into Blender...$(NC)"
 	@echo "Build addon..."
