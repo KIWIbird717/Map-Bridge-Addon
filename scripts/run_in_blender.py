@@ -5,9 +5,8 @@ import shutil
 import subprocess
 import zipfile
 from pathlib import Path
-from ._addon_builder_utils import overrides
-from .build import BlenderAddonBuilder
 from typing import Optional
+from .build import BlenderAddonBuilder
 
 
 class BlenderAddonInstaller(BlenderAddonBuilder):
@@ -63,8 +62,9 @@ class BlenderAddonInstaller(BlenderAddonBuilder):
         return None
 
     def save_blender_path(self, blender_path: Path):
-        """Сохраняет путь к Blender в конфигурационный файл"""
-        """Save path to Blender to config file"""
+        """
+        Save path to Blender to config file
+        """
         config = {"blender_path": str(blender_path)}
         with open(self.config_file, 'w', encoding='utf-8') as f:
             json.dump(config, f, indent=2, ensure_ascii=False)
@@ -102,7 +102,7 @@ class BlenderAddonInstaller(BlenderAddonBuilder):
             return False
         return True
 
-    def get_blender_addons_dir(self, blender_path: Path) -> Path:
+    def get_blender_addons_dir(self, _: Path) -> Path:
         """Get Blender addons directory path"""
         system = platform.system().lower()
 

@@ -4,7 +4,6 @@ from pathlib import Path
 
 class BuildError(Exception):
     """Build errors exception"""
-    pass
 
 
 class AddonBuilderUtils:

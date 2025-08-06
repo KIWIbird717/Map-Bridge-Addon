@@ -1,10 +1,7 @@
+from typing import Type
 import bpy
-import stat
-from pathlib import Path
-from bpy.app import binary_path
 from bpy.types import PropertyGroup, PointerProperty
 from bpy.utils import register_class, unregister_class
-from typing import Type
 
 from .google_earth.register_binaries import register_binaries
 
