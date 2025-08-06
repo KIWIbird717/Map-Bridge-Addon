@@ -18,7 +18,7 @@ build: ## Build project in zip archive
 	@echo "$(GREEN)Run build scrip$(NC)"
 	$(PYTHON) $(BUILD_SCRIPT_PATH)
 
-open-blender: ## Install addon to blender and launch blender
+run: ## Install addon to blender and launch blender with installed addon
 	@echo "$(YELLOW)Installing addon into Blender...$(NC)"
 	@echo "Build addon..."
 	@make build
