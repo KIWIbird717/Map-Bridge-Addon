@@ -4,8 +4,11 @@ from bpy.types import PropertyGroup
 from bpy.props import PointerProperty
 from bpy.utils import register_class, unregister_class
 
+from .operators import MAPBRIDGE_OT_OpenWebInterface, MAPBRIDGE_OT_PasteCoordinates
+from .osm.operator import MAPBRIDGE_OT_RunOsmImport
+from .properties import MapBridgeProperties
+
 from .google_earth.operator import MAPBRIDGE_OT_OpenEarthWebsite, MAPBRIDGE_OT_RunGoogleEarthImport
-from .google_earth.properties import GoogleImportProperties
 from .panel import MAPBRIDGE_PT_MainPanel
 
 from .google_earth.register_binaries import register_binaries
@@ -20,9 +23,12 @@ bl_info = {
 classes = [
     MAPBRIDGE_PT_MainPanel,
     MAPBRIDGE_OT_RunGoogleEarthImport,
-    MAPBRIDGE_OT_OpenEarthWebsite
+    MAPBRIDGE_OT_OpenEarthWebsite,
+    MAPBRIDGE_OT_RunOsmImport,
+    MAPBRIDGE_OT_OpenWebInterface,
+    MAPBRIDGE_OT_PasteCoordinates,
 ]
-properties: list[Type[PropertyGroup]] = [GoogleImportProperties]
+properties: list[Type[PropertyGroup]] = [MapBridgeProperties]
 
 classes.extend(properties)
 

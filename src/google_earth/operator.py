@@ -25,7 +25,7 @@ class MAPBRIDGE_OT_OpenEarthWebsite(bpy.types.Operator):
 
 class MAPBRIDGE_OT_RunGoogleEarthImport(bpy.types.Operator):
     bl_idname = "google_earth.run"
-    bl_label = "Run import"
+    bl_label = "Google Earth Import"
 
     def get_binary_path(self, addon_dir):
         """
@@ -49,26 +49,17 @@ class MAPBRIDGE_OT_RunGoogleEarthImport(bpy.types.Operator):
 
         return binary_path, system
 
-    def format_coordinates_for_bbox(self, coord_string):
+    def create_bbox_string(self, system, minLat, minLng, maxLat, maxLng):
         """
-        Format coordinates to --bbox style
+        Create --bbox string from bbox coordinates
         """
-        formatted = coord_string.replace(' ', ':')
-        return formatted
-
-    def create_bbox_string(self, coord1, coord2, system):
-        """
-        Create --bbox string from 2 coordinates
-        """
-        formatted_coord1 = self.format_coordinates_for_bbox(coord1)
-        formatted_coord2 = self.format_coordinates_for_bbox(coord2)
 
         if system == "darwin":
-            return f"--bbox={formatted_coord1};{formatted_coord2}"
+            return f"--bbox='{minLat},{minLng},{maxLat},{maxLng}'"
         elif system == "windows":
-            return f"--bbox=\"{formatted_coord1};{formatted_coord2}\""
+            return f"--bbox=\"{minLat},{minLng},{maxLat},{maxLng}\""
         elif system == "linux":
-            return f"--bbox={formatted_coord1};{formatted_coord2}"
+            return f"--bbox='{minLat},{minLng},{maxLat},{maxLng}'"
         else:
             raise OSError(f"Unsupported OS: {system}")
 
@@ -103,19 +94,9 @@ class MAPBRIDGE_OT_RunGoogleEarthImport(bpy.types.Operator):
         except Exception as e:
             print(f"Exception while cleaning cache folder: {e}")
 
-    def execute(self, context):
-        # Validate coordinates
-        coord1_valid, coord1_error = validate_coordinates(
-            context.scene.geo_coord1)
-        coord2_valid, coord2_error = validate_coordinates(
-            context.scene.geo_coord2)
-
-        if not coord1_valid:
-            self.report({'ERROR'}, f"Error in first point: {coord1_error}")
-            return {'CANCELLED'}
-
-        if not coord2_valid:
-            self.report({'ERROR'}, f"Error in second point: {coord2_error}")
+    def execute(self, context) -> set[OperatorReturnItems]:
+        scene = context.scene
+        if not scene:
             return {'CANCELLED'}
 
         addon_dir = os.path.dirname(__file__)
@@ -136,8 +117,9 @@ class MAPBRIDGE_OT_RunGoogleEarthImport(bpy.types.Operator):
         self.cleanup_cache(obj_dir)
 
         # Create --bbox string
+        map_bridge = scene.map_bridge
         bbox_string = self.create_bbox_string(
-            context.scene.geo_coord1, context.scene.geo_coord2, system)
+            system, map_bridge.minLat, map_bridge.minLng, map_bridge.maxLat, map_bridge.maxLng)
         self.report({'INFO'}, f"Запуск скрипта с аргументом: {bbox_string}")
 
         # Run binary
@@ -157,7 +139,7 @@ class MAPBRIDGE_OT_RunGoogleEarthImport(bpy.types.Operator):
             for line in process.stdout:
                 line = line.strip()
                 if line:
-                    print(f"EXPORT: {line}")
+                    print(f"GOOGLE EARTH IMPORT: {line}")
 
                     if "done. saved as" in line:
                         break

@@ -20,10 +20,6 @@ build: ## Build project in zip archive
 
 init-submodule: ## Initialize and update google-earth-importer submodule if not present
 	@echo "$(YELLOW)Checking and initializing submodules...$(NC)"
-	@if [ ! -d "./google-earth-exporter/.git" ]; then \
-		echo "No submodules found, adding submodules..."; \
-		git submodule add git@github.com:KIWIbird717/Google-Earth-CLI-Exporter.git google-earth-exporter; \
-	fi
 	git submodule init
 	git submodule update --remote
 	@echo "$(GREEN)Submodule initialized$(NC)"
