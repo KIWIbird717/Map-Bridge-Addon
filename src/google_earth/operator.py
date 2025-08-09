@@ -8,7 +8,6 @@ import webbrowser
 from decimal import Context
 
 from .._types import OperatorReturnItems
-from ._utils import validate_coordinates
 
 
 class MAPBRIDGE_OT_OpenEarthWebsite(bpy.types.Operator):
@@ -120,7 +119,7 @@ class MAPBRIDGE_OT_RunGoogleEarthImport(bpy.types.Operator):
         map_bridge = scene.map_bridge
         bbox_string = self.create_bbox_string(
             system, map_bridge.minLat, map_bridge.minLng, map_bridge.maxLat, map_bridge.maxLng)
-        self.report({'INFO'}, f"Запуск скрипта с аргументом: {bbox_string}")
+        self.report({'INFO'}, f"Run binary with bbox: {bbox_string}")
 
         # Run binary
         try:
