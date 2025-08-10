@@ -1,6 +1,6 @@
 [project]
 name = "map-bridge"
-version = "0.1.0"
+version = "1.0.0"
 description = ""
 authors = [{ name = "KIWIbird717" }]
 readme = "README.md"
@@ -15,4 +15,3 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.group.dev.dependencies]
 fake-bpy-module = "^20250630"
 pylint = "^3.3.7"
-
