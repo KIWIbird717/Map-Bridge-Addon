@@ -4,7 +4,7 @@
 
 <h1 align="center">Map Bridge</h1>
 
-> Blender addon for maps import
+> Blender addon for importing maps
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-brightgreen?logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -14,23 +14,87 @@
 
 ---
 
-## 🌍 Описание
+## 🌍 Description
 
-**Blender Map Importer** — это аддон для Blender, позволяющий импортировать 3D-сцены из **Google Earth** или автоматически генерировать 3D-окружение на основе данных **OpenStreetMap**.
+**Blender Map Importer** is a Blender addon that allows you to import 3D scenes from **Google Earth** or automatically generate 3D environments based on **OpenStreetMap** data.
 
-С его помощью вы можете в несколько кликов создать реалистичную геолокацию прямо в сцене Blender, включая здания, улицы и рельеф.
+With just a few clicks, you can create a realistic geolocation directly in your Blender scene, including buildings, streets, and terrain.
 
-## 🚀 Возможности
+## 🚀 Features
 
-- 📦 Импорт 3D-моделей из **Google Earth**
-- 🗺️ Генерация 3D-сцен на основе **OpenStreetMap**
-- 🎯 Поддержка координатного ввода (широта, долгота)
-- ⚙️ Простая настройка уровня детализации
+- 📦 Import 3D models from **Google Earth**
+- 🗺️ Generate 3D scenes based on **OpenStreetMap**
+- 🎯 Coordinate input support (latitude, longitude)
+- ⚙️ Easy level of detail configuration
 
-## 📷 Примеры
+## 📷 Examples
 
-_(добавить скриншоты сцен и видео)_
+<div align="center">
+<img src="./assets/screenshot1.jpeg" alt="Application Interface" style="border-radius: 8px;" />
+<img src="./assets/screenshot2.jpeg" alt="Application Interface" style="border-radius: 8px;" />
+<img src="./assets/screenshot3.jpeg" alt="Application Interface" style="border-radius: 8px;" />
+<img src="./assets/screenshot4.jpeg" alt="Application Interface" style="border-radius: 8px;" />
+</div>
 
-## 🧭 Установка и использование
+## 🚀 Installation & Usage
 
-_(добавить инструкции по установке и запуску)_
+### 1️⃣ Prerequisites
+
+- **Python** ≥ 3.11
+- **Poetry** for dependency management
+- **Node.js** ≥ 18 (for the web-based map selection tool)
+- **Blender** ≥ 4.0
+- **Make** (to run build scripts)
+
+Install Poetry if you don't have it:
+
+```bash
+pip install poetry
+```
+
+Install Python dependencies:
+
+```bash
+poetry install
+```
+
+---
+
+### 2️⃣ Available Commands
+
+Run the following commands from the project root:
+
+| Command               | Description                                                       |
+| --------------------- | ----------------------------------------------------------------- |
+| `make help`           | Show available commands                                           |
+| `make build`          | Build the addon into a `.zip` archive                             |
+| `make init-submodule` | Initialize and update the Google Earth importer submodule         |
+| `make run`            | Install the addon into Blender and launch Blender with it enabled |
+
+---
+
+### 3️⃣ Build the Addon
+
+```bash
+make build
+```
+
+This will create a `.zip` archive in `dist` folder of the addon that can be manually installed in Blender via **Edit → Preferences → Add-ons → Install**.
+
+---
+
+### 4️⃣ Run Blender with the Addon
+
+To automatically install and run the addon in Blender:
+
+```bash
+make run
+```
+
+---
+
+### 5️⃣ Using the Addon
+
+1. Open Blender.
+2. Enable the **Map Bridge** addon in **Preferences → Add-ons**.
+3. Access it in the **3D View → Sidebar (N) → Map Bridge** tab.
