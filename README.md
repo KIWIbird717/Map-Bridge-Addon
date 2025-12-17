@@ -36,6 +36,16 @@ With just a few clicks, you can create a realistic geolocation directly in your 
 <img src="./assets/screenshot4.jpeg" alt="Application Interface" style="border-radius: 8px;" />
 </div>
 
+## 🚀 Use in Blender
+
+To install the addon from a ready-made release:
+
+1. Download the `map-bridge.zip` file from the [GitHub releases page](https://github.com/KIWIbird717/Map-Bridge-Addon/releases/tag/v0.1.0).
+2. Open Blender and go to **Edit → Preferences → Add-ons**.
+3. Click **Install...**, select the downloaded `map-bridge.zip`, and confirm.
+4. Enable the **Map Bridge** addon in the list (use the search field if needed).
+5. In the 3D Viewport, press **N** to open the sidebar and use the addon under the **Map Bridge** tab.
+
 ## 🚀 Installation & Usage
 
 ### 1️⃣ Prerequisites
